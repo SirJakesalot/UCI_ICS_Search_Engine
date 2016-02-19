@@ -11,7 +11,6 @@ Vinh Vu             21775557
 
 import os
 import re
-import sys
 from collections import defaultdict
 
 class Indexer():
@@ -39,6 +38,9 @@ class Indexer():
         self.term_id_lookup = dict()
         self.indexer = dict()
 
+    #
+    # Processing functions.
+    #
     def processPage(self, file_name):
         """Processes the page.
 
@@ -56,14 +58,25 @@ class Indexer():
             lines = f.readlines()
             for line in lines:
                 for word in re.sub("[^0-9a-zA-Z]+", " ", line).split(" "):
-                    word = word.lower().strip()
-                    if len(word) != 0:
-                        if word not in self.term_id_lookup:
-                            self.term_id_lookup[word] = self.__term_id
-                            self.indexer[self.__term_id] = defaultdict(lambda: 0)
-                            self.__term_id += 1
-                        self.indexer[self.term_id_lookup[word]][self.__doc_id] += 1
+                    self.__add_word(word)
             self.__doc_id += 1
+
+    def __add_word(self, word):
+        """Processes the word into a proper term.
+
+        Lowercases and strips it of any non-alphanumeric characters, then stores the
+        new term into its appropriate dictionary.
+
+        Args:
+            word: The word to be processed.
+        """
+        word = word.lower().strip()
+        if len(word) != 0:
+            if word not in self.term_id_lookup:
+                self.term_id_lookup[word] = self.__term_id
+                self.indexer[self.__term_id] = defaultdict(lambda: 0)
+                self.__term_id += 1
+            self.indexer[self.term_id_lookup[word]][self.__doc_id] += 1
 
 
     def handleDir(self, dirname):
