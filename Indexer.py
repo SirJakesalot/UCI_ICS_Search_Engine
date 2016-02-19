@@ -1,26 +1,50 @@
+"""
+@Authors:
+Jacob Armentrout    66598462
+Gillian Bendicio    56433482
+Jennifer Chew       53649288
+Vinh Vu             21775557
+
+@Created: 02/18/16
+
+@Source: Indexer.py
+"""
+
 import os
 import re
 import sys
 from collections import defaultdict
 
 class Indexer():
+    """Indexer class for the search engine index.
+
+    Provides all methods and datastructures to appropriately process, index and store 
+    terms and documents which will be later used to provide a functional search engine.
+
+    Attributes:
+        doc_id: The current available unused document ID. Also represents the amount 
+            of unique documents found so far (doc_id - 1).
+        term_id: The current available unused term ID. Also represents the amount of 
+            unique terms found so far (term_id - 1).
+        doc_id_lookup: Dictionary mapping document URLs to their document ID {URL : doc_id}.
+        term_id_lookup: Dictionary mapping terms to their term ID {term : term_id}.
+        indexer: Dictionary mapping term IDs to their dictionary of document IDs to the 
+            frequency count within that same document {term_id : {doc_id : frequency}}.
+    """
 
     def __init__(self):
+        """Inits term and document ID to 1. The lookup datastructures to dictionaries."""
         self.doc_id = 1
         self.term_id = 1
-        # doc -> doc_id
         self.doc_id_lookup = dict()
-        # term -> term_id
         self.term_id_lookup = dict()
-        # term_id -> (doc_id -> freq)
         self.indexer = dict()
 
     def processPage(self, file_name):
         """Processes the page.
 
-        Processes the page by stripping the read lines of whitespace and
-        non-alphanumeric characters. The stripped terms are then saved into
-        the indexer data structure.
+        Processes the page by stripping the read lines of whitespace and non-alphanumeric 
+        characters. The stripped terms are then saved into the indexer data structure.
 
         Args:
             file_name: The name of the file to be processed.
@@ -60,12 +84,12 @@ class Indexer():
                 print "New path: " + new_path
                 self.handleDir(new_path)
 
-    # term_id -> term
     def get_inverse_term_lookup(self):
+        """Returns an inverse dictionary of term_id_lookup: term_id -> term."""
         return {v : k for k,v in self.term_id_lookup.items()}
 
-    # doc_id -> doc
     def get_inverse_doc_lookup(self):
+        """Returns an inverse dictionary of doc_id_lookup: doc_id -> doc."""
         return {v : k for k,v in self.doc_id_lookup.items()}       
 
 
@@ -73,7 +97,7 @@ if __name__ == "__main__":
     indexer = Indexer()
     indexer.handleDir("test");
     terms = indexer.term_id_lookup
-    for k,v in indexer.inverse_doc_id_lookup.items():
+    for k,v in indexer.get_inverse_term_lookup().items():
         print "key", k
         print v
 
