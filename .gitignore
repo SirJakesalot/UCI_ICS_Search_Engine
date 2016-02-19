@@ -1,0 +1,6 @@
+*.swp
+
+data/*
+test/*
+
+.DS_STORE
