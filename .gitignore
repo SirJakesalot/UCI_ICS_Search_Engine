@@ -1,6 +1,8 @@
 *.swp
+*.txt
 
 data/*
 test/*
 
 .DS_STORE
+.idea

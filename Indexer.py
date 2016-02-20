@@ -11,6 +11,7 @@ Vinh Vu             21775557
 
 import os
 import re
+import sys
 from collections import defaultdict
 
 class Indexer():
@@ -78,33 +79,45 @@ class Indexer():
                 self.__term_id += 1
             self.indexer[self.term_id_lookup[word]][self.__doc_id] += 1
 
-
     def handleDir(self, dirname):
         """Opens the file/directory for processessing.
 
         Opens the directory and lists all the files/directories for processing.
         Recursively calls into any directories found, otherwise calls handleFile().
-        
+
         Args:
             dirname: The name of the directory to be processed.
         """
         for dirpath, directories, files in os.walk(dirname):
-            print dirpath, directories, files
             for f in files:
-                print f
                 self.processPage(os.path.join(dirpath, f))
-            for d in directories:
-                print d
-                self.handleDir(os.path.join(dirpath, d))
+
+    def save_indexer_to_file(self, file_name):
+        """Writes the indexer data to a file.
+
+        Writes out to the file by temporarily redirecting the stdout to the given
+        file.
+
+        Args:
+            file_name: The name of the file to be written to.
+        """
+        stdout = sys.stdout
+        with open(file_name, "w") as f:
+            sys.stdout = f
+            self.print_indexer()
+        sys.stdout = stdout
+
 
     #
     # Getter functions.
     #
-    def get_term_count(self):
+    @property
+    def num_terms(self):
         """Returns the amount of unique terms found."""
         return self.__term_id - 1
 
-    def get_doc_count(self):
+    @property
+    def num_docs(self):
         """Returns the amount of unique documents found."""
         return self.__doc_id - 1
 
@@ -156,23 +169,26 @@ class Indexer():
         for k,v in sorted(self.get_inverse_doc_lookup().items(), key=lambda x: x[not by_id]):
             print "({} : {})".format(k,v)
 
+    def print_indexer(self, print_word=False):
+        """Prints the key, value pairs of the indexer.
+
+        The format for the index is {term_id : {doc_id, frequency}}. In English, each term_id
+        has dictionary values which indicates its frequency in a specific document.
+
+        Args:
+            with_word: Flag indicating if the user wants to print out the actual word along
+            with the term.
+        """
+        for k,v in self.indexer.items():
+            term = self.get_inverse_term_lookup()[k] if print_word else ""
+            print "({} {} : ({})".format(k, term, dict(v))
+
 
 if __name__ == "__main__":
     indexer = Indexer()
-    indexer.handleDir("test");
-    terms = indexer.term_id_lookup
+    indexer.handleDir("data/xtune.ics");
 
-    indexer.print_term_lookup()
-    #indexer.print_doc_lookup()
-    #indexer.print_inverse_term_lookup()
-    #indexer.print_inverse_doc_lookup()
+    print indexer.num_docs
+    print indexer.num_terms
 
-    """
-    for key,val in sorted(indexer.indexer.items()):
-        print "Inverse TermId: " + str(key) + " term: " + indexer.inverse_term_id_lookup[key] 
-        for vkey, v in val.items():
-            print "DocId", str(vkey), "doc:", indexer.inverse_doc_id_lookup[vkey], "frequency", str(v)
-    for k,v in sorted(terms.items(), key=lambda x: x[1][1]):
-        print("Key:", k)
-        print(v)'''
-    """
+    indexer.save_indexer_to_file("index.txt")
