@@ -92,19 +92,30 @@ class Indexer():
             for f in files:
                 self.processPage(os.path.join(dirpath, f))
 
-    def save_indexer_to_file(self, file_name):
-        """Writes the indexer data to a file.
+    def save_indexer_to_files(self):
+        """Writes the index data to a file.
 
         Writes out to the file by temporarily redirecting the stdout to the given
         file.
+
+        Files written:
+            index.txt - Contains the indexer data
+            terms.txt - Contains the term to term_id data
+            docs.txt - Contains the doc to doc_id data
 
         Args:
             file_name: The name of the file to be written to.
         """
         stdout = sys.stdout
-        with open(file_name, "w") as f:
-            sys.stdout = f
-            self.print_indexer()
+        files = [("index.txt", self.print_indexer),
+                 ("terms.txt", self.print_term_lookup),
+                 ("docs.txt", self.print_doc_lookup)]
+
+        for name,func in files:
+            with open(name, "w") as f:
+                sys.stdout = f
+                func()
+
         sys.stdout = stdout
 
 
@@ -191,4 +202,4 @@ if __name__ == "__main__":
     print indexer.num_docs
     print indexer.num_terms
 
-    indexer.save_indexer_to_file("index.txt")
+    indexer.save_indexer_to_files()
