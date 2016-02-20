@@ -1,13 +1,14 @@
-"""
-@Authors:
-Jacob Armentrout    66598462
-Gillian Bendicio    56433482
-Jennifer Chew       53649288
-Vinh Vu             21775557
-
-@Created: 02/18/16
-@Source: Indexer.py
-"""
+#!/usr/bin/python
+###########################################################
+# @Authors:
+# Jacob Armentrout    66598462
+# Gillian Bendicio    56433482
+# Jennifer Chew       53649288
+# Vinh Vu             21775557
+#
+# @Created: 02/18/16
+# @Source: Indexer.py
+###########################################################
 
 import os
 import re
