@@ -12,6 +12,7 @@ Vinh Vu             21775557
 import os
 import re
 import sys
+import time
 from collections import defaultdict
 
 class Indexer():
@@ -197,9 +198,12 @@ class Indexer():
 
 if __name__ == "__main__":
     indexer = Indexer()
-    indexer.handleDir("data/xtune.ics");
 
-    print indexer.num_docs
-    print indexer.num_terms
+    # Time the indexer
+    start = time.time()
+    indexer.handleDir("data");
+    end = time.time()
+
+    print "Time:", str(end - start), "seconds"
 
     indexer.save_indexer_to_files()
