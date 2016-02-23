@@ -3,6 +3,7 @@
 
 data/*
 test/*
+milestone1/*
 
 .DS_STORE
 .idea
