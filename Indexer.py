@@ -188,7 +188,7 @@ class Indexer:
             by_id: Boolean indicating whether to sort by ID, otherwise by name.
         """
         for k, v in sorted(self.term_id_lookup.items(), key=lambda x: x[by_id]):
-            print "({} : {})".format(k, v)
+            print("({} : {})".format(k, v))
 
     def print_doc_lookup(self, by_id=True):
         """Prints the key, value pairs of doc_id_lookup.
@@ -197,7 +197,7 @@ class Indexer:
             by_id: Boolean indicating whether to sort by ID, otherwise by name.
         """
         for k, v in sorted(self.doc_id_lookup.items(), key=lambda x: x[by_id]):
-            print "({} : {})".format(k, v)
+            print("({} : {})".format(k, v))
 
     def print_inverse_term_lookup(self, by_id=True):
         """Prints the inverse key, value pairs of term_id_lookup.
@@ -206,7 +206,7 @@ class Indexer:
             by_id: Boolean indicating whether to sort by ID, otherwise by name.
         """
         for k, v in sorted(self.get_inverse_term_lookup().items(), key=lambda x: x[not by_id]):
-            print "({} : {})".format(k, v)
+            print("({} : {})".format(k, v))
 
     def print_inverse_doc_lookup(self, by_id=True):
         """Prints the inverse key, value pairs of doc_id_lookup.
@@ -215,7 +215,7 @@ class Indexer:
             by_id: Boolean indicating whether to sort by ID, otherwise by name.
         """
         for k, v in sorted(self.get_inverse_doc_lookup().items(), key=lambda x: x[not by_id]):
-            print "({} : {})".format(k,v)
+            print("({} : {})".format(k,v))
 
     def print_indexer(self, print_word=False):
         """Prints the key, value pairs of the indexer.
@@ -229,7 +229,7 @@ class Indexer:
         """
         for k, v in self.indexer.items():
             term = self.get_inverse_term_lookup()[k] if print_word else ""
-            print "({} {} : ({})".format(k, term, dict(v))
+            print("({} {} : ({})".format(k, term, dict(v)))
 
     def print_tf_idf(self, print_word=False):
         """Prints the key, value pairs of the indexer.
@@ -243,12 +243,12 @@ class Indexer:
         """
         for k, v in self.tf_idf.items():
             term = self.get_inverse_term_lookup()[k] if print_word else ""
-            print "({} {} : ({})".format(k, term, dict(v))
+            print("({} {} : ({})".format(k, term, dict(v)))
 
     def print_doc_lengths(self):
         """Prints the document ID, document length (word count) pairs."""
         for k, v in self.doc_term_count.items():
-            print "({} : {})".format(k, v)
+            print("({} : {})".format(k, v))
 
 if __name__ == "__main__":
     indexer = Indexer()
@@ -259,6 +259,6 @@ if __name__ == "__main__":
     indexer.create_tf_idf()
     end = time.time()
 
-    print "Time:", str(end - start), "seconds"
+    print("Time:", str(end - start), "seconds")
 
     indexer.save_indexer_to_files()
