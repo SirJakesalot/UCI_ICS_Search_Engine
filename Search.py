@@ -17,12 +17,19 @@ def read_tf_idf():
                 result[term_id][doc[0]] = doc[1]
             #print(result[term_id])
     return result
-
-query = input("Input term: ")
-terms = []
+def read_terms():
+    result = dict()
+    with open("terms.txt") as f:
+        for line in f.readlines():
+            line = re.sub("[\(:\{\}\),]*", "",line).split()
+            result[line[0]] = line[1]
+    return result
+tf_idf = read_tf_idf()
+term2term_id = read_terms()
+query = "machine learning"
 for term in re.sub("[^0-9a-zA-Z]+", " ", query.strip()).split(" "):
-    print("Term: " + term)
-    terms.append(term)
+    print("Term: " + term + ", term_id: " + term2term_id[term])
+    result = list(tf_idf[term2term_id[term]])
+    for i in range(0,10):
+        print(result[i])
 
-result = read_tf_idf()
-print(result['249686'])
