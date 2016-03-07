@@ -16,6 +16,7 @@ import sys
 import copy
 import math
 import time
+import shutil
 from collections import defaultdict
 
 
@@ -48,6 +49,9 @@ class Indexer:
         self.doc_term_count = dict()
         self.indexer = dict()
         self.tf_idf = dict()
+       
+        # Added by Jake 
+        self.indexer_path = "Indexer_Data"
 
     #
     # Processing functions.
@@ -101,6 +105,7 @@ class Indexer:
         Args:
             dirname: The name of the directory to be processed.
         """
+        self.createIndexerDir()
         for dirpath, directories, files in os.walk(dirname):
             for f in files:
                 self.process_page(os.path.join(dirpath, f))
@@ -121,11 +126,11 @@ class Indexer:
             file_name: The name of the file to be written to.
         """
         stdout = sys.stdout
-        files = [("index.txt", self.print_indexer),
-                 ("tf_idf.txt", self.print_tf_idf),
-                 ("doc_lengths.txt", self.print_doc_lengths),
-                 ("terms.txt", self.print_term_lookup),
-                 ("docs.txt", self.print_doc_lookup)]
+        files = [(self.indexer_path + "/index.txt", self.print_indexer),
+                 (self.indexer_path + "/tf_idf.txt", self.print_tf_idf),
+                 (self.indexer_path + "/doc_lengths.txt", self.print_doc_lengths),
+                 (self.indexer_path + "/terms.txt", self.print_term_lookup),
+                 (self.indexer_path + "/docs.txt", self.print_doc_lookup)]
 
         for name, func in files:
             with open(name, "w") as f:
@@ -249,6 +254,12 @@ class Indexer:
         """Prints the document ID, document length (word count) pairs."""
         for k, v in self.doc_term_count.items():
             print("({} : {})".format(k, v))
+
+    def createIndexerDir(self):
+        ''' Overwrites a dir if it already exists '''
+        if os.path.exists(self.indexer_path):
+            shutil.rmtree(self.indexer_path)
+        os.makedirs(self.indexer_path)
 
 if __name__ == "__main__":
     indexer = Indexer()
