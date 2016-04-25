@@ -1,0 +1,37 @@
+Given query: mondego
+<TOKENIZED QUERY>
+-> mondego
+</TOKENIZED QUERY>
+Term: mondego, Term Id: 43956
+<QUERY RESULTS>
+-> ('https://mailman.ics.uci.edu/mailman/listinfo/mondego', 6.280604211645782)
+-> ('http://mondego.ics.uci.edu/', 4.638606986751907)
+-> ('https://mailman.ics.uci.edu/mailman/admin/mondego', 4.085627235122347)
+-> ('http://www.ics.uci.edu/~lopes/', 4.085627235122347)
+-> ('http://www.ics.uci.edu/~djp3/classes/2006_03_30_ICS105/Resources/AnteaterIdol.html', 4.085627235122347)
+-> ('https://www.ics.uci.edu/community/news/notes/notes_2014.php', 3.140302105822891)
+-> ('https://www.ics.uci.edu/community/news/notes/notes_2013.php', 3.140302105822891)
+-> ('https://mailman.ics.uci.edu/mailman/private/mondego/', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~lopes/datasets/sourcerer-maven-aug12.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~lopes/datasets/index.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~lopes/datasets/SDS_source-repo-18k.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~lopes/datasets/Koders-log-2007.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~lopes/datasets/', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~kay/courses/i141/hw/asst3.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~djp3/classes/2006_03_30_ICS105/index.html', 3.140302105822891)
+-> ('http://www.ics.uci.edu/~djp3/classes/2006_03_30_ICS105/', 3.140302105822891)
+-> ('http://www.ics.uci.edu/community/news/notes/notes_2014.php', 3.140302105822891)
+-> ('http://www.ics.uci.edu/community/news/notes/notes_2013.php', 3.140302105822891)
+-> ('http://sourcerer.ics.uci.edu/index.html', 3.140302105822891)
+-> ('http://sourcerer.ics.uci.edu/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/source/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/latest/plugins/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/latest/features/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/latest/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/demo/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/projects/clonedetection/tool/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/datasets/wikipedia-events/files/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/datasets/wikipedia-events/', 3.140302105822891)
+-> ('http://mondego.ics.uci.edu/datasets/', 3.140302105822891)
+</QUERY RESULTS>
+Time for query in seconds: 0.000469207763671875

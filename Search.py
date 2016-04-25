@@ -148,8 +148,8 @@ if __name__ == "__main__":
     # File path locations
     #data_path = "data"
     data_path = "/home/jake/Desktop/data"
-    #search_engine = Search_Engine(data_path)
-    search_engine = Search_Engine()
+    search_engine = Search_Engine(data_path)
+    #search_engine = Search_Engine()
 
     # Create the directory to hold the query files
     queries = ["machine learning", "mondego", "software engineering", "security", "student affairs", "graduate courses", "informatics", "REST", "computer games", "information retrieval"] 
